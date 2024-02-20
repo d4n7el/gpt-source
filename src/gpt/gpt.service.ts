@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { orthographyUseCase } from './use-cases';
-import { OrthographyDto } from './dtos';
+import { orthographyUseCase, imagesUseCase } from './use-cases';
+import { OrthographyDto, ImageDto } from './dtos';
 import OpenAI from 'openai';
 
 @Injectable()
@@ -10,5 +10,9 @@ export class GptService {
   });
   async orthographyCheck(orthographyDto: OrthographyDto) {
     return orthographyUseCase({ openAI: this.openAI, orthographyDto });
+  }
+
+  async generateImage(imageDto: ImageDto) {
+    return imagesUseCase({ openAI: this.openAI, imageDto });
   }
 }
